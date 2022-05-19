@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,6 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group(function (){
     Route::resource('products', ProductController::class);
+    Route::post('upload', [FileUploadController::class, 'store']);
 });
 
