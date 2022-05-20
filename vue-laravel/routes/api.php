@@ -21,6 +21,7 @@ use App\Http\Controllers\API\NewPasswordController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
+Route::post('logout', [RegisterController::class, 'logout'])->middleware('auth:api');
 
 Route::middleware('auth:api')->group(function (){
     Route::resource('products', ProductController::class);

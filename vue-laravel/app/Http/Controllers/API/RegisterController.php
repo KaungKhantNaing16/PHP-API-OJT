@@ -41,6 +41,7 @@ class RegisterController extends BaseController
     /**
      * Login api
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -55,5 +56,20 @@ class RegisterController extends BaseController
         else{ 
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
+    }
+
+    /**
+     * Logout api
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout (Request $request) 
+    {
+        $accessToken = auth()->user()->token();
+        $token= $request->user()->tokens->find($accessToken);
+        $token->revoke();
+        
+        return response(['message' => 'You have been successfully logged out.'], 200);
     }
 }
