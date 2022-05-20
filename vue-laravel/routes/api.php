@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\FileUploadController;
+use App\Http\Controllers\API\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group(function (){
     Route::resource('products', ProductController::class);
-    Route::post('upload', [FileUploadController::class, 'store']);
+    Route::post('upload', [FileUploadController::class, 'store'])->name('file.upload');
+    Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword'])->name('password.forget');
+    Route::post('reset-password', [NewPasswordController::class, 'reset'])->name('password.reset');
 });
 
