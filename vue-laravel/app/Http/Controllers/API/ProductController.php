@@ -101,4 +101,16 @@ class ProductController extends BaseController
    
         return $this->sendResponse([], 'Product deleted successfully.');
     }
+
+    /**
+     * Search product 
+     * 
+     * @param $input
+     * @return search result
+     */
+    public function search($input)
+    {
+        return Product::where("name","like","%".$input."%")
+                        ->orWhere("detail","like","%".$input."%")->get();
+    }
 }

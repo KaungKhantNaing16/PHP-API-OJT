@@ -25,6 +25,7 @@ Route::post('logout', [RegisterController::class, 'logout'])->middleware('auth:a
 
 Route::middleware('auth:api')->group(function (){
     Route::resource('products', ProductController::class);
+    Route::get('products/search/{input}', [ProductController::class, 'search'])->name('product.search');
     Route::post('upload', [FileUploadController::class, 'store'])->name('file.upload');
     Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword'])->name('password.forget');
     Route::post('reset-password', [NewPasswordController::class, 'reset'])->name('password.reset');
